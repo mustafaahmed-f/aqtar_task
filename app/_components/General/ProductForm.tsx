@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AddProductAction } from "@/app/_utils/_ServerActions/AddProductAction";
 import { EditProductAction } from "@/app/_utils/_ServerActions/EditProductAction";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 interface ProductFormProps {
   initialValues: any;
   id?: number;
@@ -35,8 +36,8 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
         : await AddProductAction({ ...data, id: 0 });
 
       if (response?.status === 200) {
-        // Optionally, you can redirect or refresh the page here
-        window.location.reload();
+        toast.success(response.message);
+        route.push("/");
       }
     } catch (error) {
       console.log(error);
