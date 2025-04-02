@@ -4,12 +4,18 @@ import { ProductType } from "./_components/Header/_types/products.type";
 import MainProductsCard from "./_components/General/MainProductsCard";
 import ProductsPagination from "./_components/General/ProductsPagination";
 
+export async function generateMetadata() {
+  return {
+    title: "M Store | Products page",
+  };
+}
+
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams?: { page?: string };
 }) {
-  const page = searchParams.page ?? "1";
+  const page = searchParams?.page ?? "1";
   const products = await getAllProducts();
   const showedProducts = products.slice(
     (parseInt(page!) - 1) * 12,
