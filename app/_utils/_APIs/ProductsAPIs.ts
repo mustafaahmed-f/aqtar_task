@@ -52,7 +52,11 @@ export async function addProduct(product: ProductType) {
       throw new Error("Failed to add product");
     }
     const data = await response.json();
-    return data;
+    return {
+      status: response.status,
+      message: "Product added successfully",
+      data: data,
+    };
   } catch (error) {
     console.error("Error adding product:", error);
     return null;
@@ -68,6 +72,16 @@ export async function updateProduct(id: number, product: ProductType) {
       },
       body: JSON.stringify(product),
     });
+
+    if (!response.ok) {
+      throw new Error("Failed to update product");
+    }
+    const data = await response.json();
+    return {
+      status: response.status,
+      message: "Product updated successfully",
+      data: data,
+    };
   } catch (error) {
     console.error("Error updating product:", error);
     return null;
