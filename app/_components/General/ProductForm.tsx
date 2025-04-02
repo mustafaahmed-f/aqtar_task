@@ -120,7 +120,7 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
       {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-cyan-500 text-white py-2 rounded hover:bg-cyan-600"
+        className="cursor-pointer w-full bg-cyan-500 text-white py-2 rounded hover:bg-cyan-600"
       >
         {isEdit ? "Update Product" : "Add New Product"}
       </button>

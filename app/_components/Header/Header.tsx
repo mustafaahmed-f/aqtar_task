@@ -7,7 +7,7 @@ interface HeaderProps {}
 async function Header({}: HeaderProps) {
   const products = await getAllProducts();
   return (
-    <header className="sm:px-4 px-3 py-2 flex sm:flex-row max-sm:gap-3 flex-col items-center justify-between bg-black text-white">
+    <header className="px-5 sm:px-20 py-4 flex sm:flex-row max-sm:gap-3 flex-col items-center justify-between bg-black text-white">
       <Link href="/">M Store</Link>
       <ProductsSearchDiv products={products} />
     </header>
