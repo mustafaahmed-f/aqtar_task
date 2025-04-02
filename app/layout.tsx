@@ -3,6 +3,7 @@ import Header from "./_components/Header/Header";
 import "./globals.css";
 import Footer from "./_components/Footer/Footer";
 import { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased min-h-screen grid grid-rows-[auto_1fr]`}
       >
+        <Toaster position="top-center" reverseOrder={false} />
         <Header />
         {children}
         <Footer />

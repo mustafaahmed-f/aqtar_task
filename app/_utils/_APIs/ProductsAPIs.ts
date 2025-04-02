@@ -1,3 +1,5 @@
+import { ProductType } from "@/app/_components/Header/_types/products.type";
+
 export async function getAllProducts() {
   try {
     const response = await fetch("https://fakestoreapi.com/products", {
@@ -37,7 +39,7 @@ export async function getSingleProduct(id: number) {
   }
 }
 
-export async function addProduct(product: any) {
+export async function addProduct(product: ProductType) {
   try {
     const response = await fetch("https://fakestoreapi.com/products", {
       method: "POST",
@@ -57,7 +59,7 @@ export async function addProduct(product: any) {
   }
 }
 
-export async function updateProduct(id: number, product: any) {
+export async function updateProduct(id: number, product: ProductType) {
   try {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
       method: "PUT",
@@ -83,8 +85,9 @@ export async function deleteProduct(id: number) {
     if (!response.ok) {
       throw new Error("Failed to delete product");
     }
-    const data = await response.json();
-    return data;
+    // const finalResponse = await response.json();
+    // console.log("Respone :", finalResponse);
+    return { status: response.status, message: "Product deleted successfully" };
   } catch (error) {
     console.error("Error deleting product:", error);
     return null;

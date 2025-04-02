@@ -45,6 +45,7 @@ async function Page({ params }: PageProps) {
       current: true,
     },
   ];
+
   return (
     <section className="flex w-full flex-col">
       <div className="categoryList flex w-full list-none items-center justify-start bg-slate-100 px-2 py-5 sm:gap-3 sm:px-8 md:mx-0 md:gap-16 md:px-20">
