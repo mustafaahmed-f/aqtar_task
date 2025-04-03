@@ -3,10 +3,11 @@ import { ProductType } from "@/app/_components/Header/_types/products.type";
 import { getSingleProduct } from "@/app/_utils/_APIs/ProductsAPIs";
 
 interface PageProps {
-  params: any;
+  params: Promise<any>;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const product: ProductType = await getSingleProduct(parseInt(params.id));
   //   console.log("product", product);
   return {
@@ -14,7 +15,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-async function Page({ params }: PageProps) {
+async function Page(props: PageProps) {
+  const params = await props.params;
   const product = await getSingleProduct(parseInt(params.id));
   const initialValues = { ...product };
   return (

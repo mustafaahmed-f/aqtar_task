@@ -11,11 +11,12 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams?: Record<string, string | undefined>;
-}) {
+export default async function Home(
+  props: {
+    searchParams?: Promise<Record<string, string | undefined>>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const page = searchParams?.page ?? "1";
   const products = await getAllProducts();
   const showedProducts = products.slice(

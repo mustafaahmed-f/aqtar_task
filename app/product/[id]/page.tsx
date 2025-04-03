@@ -12,7 +12,8 @@ interface PageProps {
   params: any;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const product: ProductType = await getSingleProduct(parseInt(params.id));
   //   console.log("product", product);
   return {
