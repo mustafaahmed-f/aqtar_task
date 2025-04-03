@@ -1,8 +1,17 @@
 import ProductForm from "@/app/_components/General/ProductForm";
+import { ProductType } from "@/app/_components/Header/_types/products.type";
 import { getSingleProduct } from "@/app/_utils/_APIs/ProductsAPIs";
 
 interface PageProps {
   params: any;
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const product: ProductType = await getSingleProduct(parseInt(params.id));
+  //   console.log("product", product);
+  return {
+    title: `M Store | Edit Product ${product.title}`,
+  };
 }
 
 async function Page({ params }: PageProps) {

@@ -33,11 +33,13 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
       setIsLoading(true);
       const response = isEdit
         ? await EditProductAction({ ...data, id })
-        : await AddProductAction({ ...data, id: 0 });
+        : await AddProductAction({ ...data });
 
-      if (response?.status === 200) {
+      if (response?.status === 201 || response?.status === 200) {
         toast.success(response.message);
         route.push("/");
+      } else {
+        toast.error(response?.message || "Failed to add product");
       }
     } catch (error) {
       console.log(error);
@@ -71,6 +73,7 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
         <textarea
           {...register("description")}
           className="w-full p-2 border rounded"
+          rows={4}
         />
         {errors.description &&
           typeof errors.description.message === "string" && (

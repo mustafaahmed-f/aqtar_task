@@ -103,7 +103,7 @@ function ProductsSearchDiv({ products }: ProductsSearchDivProps) {
         onClick={(e) => {
           if (!productsArr.length) e.preventDefault();
         }}
-        className="h-full px-1 bg-white cursor-pointer border-s-2"
+        className="h-full px-1 bg-white cursor-pointer border-neutral-400 border-s-2"
       >
         <SearchOutlined color="action" />
       </Link>

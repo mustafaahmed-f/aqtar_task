@@ -2,6 +2,12 @@ import ProductForm from "@/app/_components/General/ProductForm";
 
 interface PageProps {}
 
+export async function generateMetadata() {
+  return {
+    title: "M Store | New Product",
+  };
+}
+
 function Page({}: PageProps) {
   const initialValues = {
     title: "",

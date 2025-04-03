@@ -5,7 +5,8 @@ export async function getAllProducts() {
     const response = await fetch("https://fakestoreapi.com/products", {
       method: "GET",
       next: {
-        revalidate: 1000 * 60 * 60 * 24,
+        revalidate: 0,
+        // revalidate: 1000 * 60 * 60 * 24,
       },
     });
     if (!response.ok) {
@@ -39,29 +40,29 @@ export async function getSingleProduct(id: number) {
   }
 }
 
-export async function addProduct(product: ProductType) {
-  try {
-    const response = await fetch("https://fakestoreapi.com/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to add product");
-    }
-    const data = await response.json();
-    return {
-      status: response.status,
-      message: "Product added successfully",
-      data: data,
-    };
-  } catch (error) {
-    console.error("Error adding product:", error);
-    return null;
-  }
-}
+// export async function addProduct(product: ProductType) {
+//   try {
+//     const response = await fetch("https://fakestoreapi.com/products", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(product),
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to add product");
+//     }
+//     const data = await response.json();
+//     return {
+//       status: response.status,
+//       message: "Product added successfully",
+//       data: data,
+//     };
+//   } catch (error) {
+//     console.error("Error adding product:", error);
+//     return null;
+//   }
+// }
 
 export async function updateProduct(id: number, product: ProductType) {
   try {
