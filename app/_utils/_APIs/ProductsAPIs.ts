@@ -64,30 +64,30 @@ export async function getSingleProduct(id: number) {
 //   }
 // }
 
-export async function updateProduct(id: number, product: ProductType) {
-  try {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    });
+// export async function updateProduct(id: number, product: ProductType) {
+//   try {
+//     const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(product),
+//     });
 
-    if (!response.ok) {
-      throw new Error("Failed to update product");
-    }
-    const data = await response.json();
-    return {
-      status: response.status,
-      message: "Product updated successfully",
-      data: data,
-    };
-  } catch (error) {
-    console.error("Error updating product:", error);
-    return null;
-  }
-}
+//     if (!response.ok) {
+//       throw new Error("Failed to update product");
+//     }
+//     const data = await response.json();
+//     return {
+//       status: response.status,
+//       message: "Product updated successfully",
+//       data: data,
+//     };
+//   } catch (error) {
+//     console.error("Error updating product:", error);
+//     return null;
+//   }
+// }
 
 export async function deleteProduct(id: number) {
   try {

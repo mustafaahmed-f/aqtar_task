@@ -1,7 +1,6 @@
 "use server";
 
 import { ProductType } from "@/app/_components/Header/_types/products.type";
-import { updateProduct } from "../_APIs/ProductsAPIs";
 import { revalidatePath } from "next/cache";
 
 export async function EditProductAction(product: ProductType) {

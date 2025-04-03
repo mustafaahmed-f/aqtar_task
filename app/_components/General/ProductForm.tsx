@@ -1,12 +1,13 @@
 "use client";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { productYupSchema } from "@/app/_utils/Validations/productYupSchema";
-import { useState } from "react";
 import { AddProductAction } from "@/app/_utils/_ServerActions/AddProductAction";
 import { EditProductAction } from "@/app/_utils/_ServerActions/EditProductAction";
+import { productYupSchema } from "@/app/_utils/Validations/productYupSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import SubmitBtn from "./SubmitBtn";
 interface ProductFormProps {
   initialValues: any;
   id?: number;
@@ -15,6 +16,7 @@ interface ProductFormProps {
 
 function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
   const { 0: isLoading, 1: setIsLoading } = useState<boolean>(false);
+  const { 0: serverMessage, 1: setServerMessage } = useState<string>("");
   const route = useRouter();
   const {
     register,
@@ -26,6 +28,7 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
     defaultValues: initialValues,
     reValidateMode: "onChange",
     criteriaMode: "firstError",
+    mode: "onTouched",
   });
 
   async function onSubmit(data: any) {
@@ -40,6 +43,7 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
         route.push("/");
       } else {
         toast.error(response?.message || "Failed to add product");
+        setServerMessage(response?.message || "Failed ");
       }
     } catch (error) {
       console.log(error);
@@ -52,7 +56,9 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md "
+      className={`max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md ${
+        isLoading ? "opacity-50 cursor-not-allowed" : ""
+      }`}
     >
       {/* Title Field */}
       <div className="mb-4">
@@ -121,12 +127,9 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
       </div>
 
       {/* Submit Button */}
-      <button
-        type="submit"
-        className="cursor-pointer w-full bg-cyan-500 text-white py-2 rounded hover:bg-cyan-600"
-      >
-        {isEdit ? "Update Product" : "Add New Product"}
-      </button>
+      <SubmitBtn isEdit={isEdit} isLoading={isLoading} />
+
+      {serverMessage && <p className="text-red-600 my-5">{serverMessage}</p>}
     </form>
   );
 }
