@@ -105,7 +105,20 @@ function ProductForm({ initialValues, isEdit = false, id }: ProductFormProps) {
         <label className="block text-gray-700">Price ($)</label>
         <input
           type="number"
-          {...register("price")}
+          step="0.01" // Allows decimal values
+          min="0" // Enforces min value
+          minLength={1}
+          {...register("price", {
+            valueAsNumber: true,
+            setValueAs: (value) => parseFloat(value),
+            min: 0,
+            minLength: 1,
+          })}
+          onBlur={(e) => {
+            if (e.target.value === "") {
+              setValue("price", 0); // Set value to 0 if empty
+            }
+          }}
           className="w-full p-2 border rounded"
         />
         {errors.price && typeof errors.price.message === "string" && (
