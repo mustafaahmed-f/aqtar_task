@@ -14,7 +14,7 @@ export async function generateMetadata() {
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { page?: string };
+  searchParams?: Record<string, string | undefined>;
 }) {
   const page = searchParams?.page ?? "1";
   const products = await getAllProducts();
